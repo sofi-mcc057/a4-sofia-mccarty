@@ -3,17 +3,22 @@ import ViteExpress from "vite-express";
 
 const app = express();
 
-const todos = [
-  { name:'buy groceries', completed:false }
-]
+const appdata = []
 
 app.use( express.json() )
 
-app.get( '/read', ( req, res ) => res.json( todos ) )
+app.get( '/read', ( req, res ) => res.json( appdata ) )
 
 app.post( '/add', ( req,res ) => {
-  todos.push( req.body )
-  res.json( todos )
+  const {yourname, assignmenttype, gradeletter, cmts} = req.body
+  const newEntry = {
+    yourname: yourname,
+    assignmenttype: assignmenttype,
+    gradeletter: gradeletter,
+    cmts: cmts,
+}
+  appdata.push(newEntry)
+  res.json( appdata )
 })
 
 app.post( '/change', function( req,res ) {

@@ -50,7 +50,35 @@ const App = () => {
 
   return (
     <div className="App">
-    <input type='text' /><button onClick={ e => add()}>add</button>
+      <label for="yourname" id="labels">What's your name? </label>
+      <input type='text' id='yourname'/>
+      <br/>
+      <br/>
+      <label for="assignment" id="labels">Assignment Type: </label>
+      <select name="assignment-type" id="assignmenttype">
+        <option value="">--Please choose an option--</option>
+        <option value="hw">hw</option>
+        <option value="quiz">quiz</option>
+        <option value="test">test</option>
+        <option value="project">project</option>
+      </select>
+      <br/>
+      <br/>
+      <label for="grade" id="labels">Letter Grade: </label>
+      <select name="grade-letter" id="gradeletter">
+        <option value="">--Please choose an option--</option>
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+      </select>
+      <br/>
+      <br/>
+      <label for="cmts" id="labels">Any comments? </label>
+      <textarea id="cmts" name="comments"></textarea>
+      <br/>
+      <br/>
+    <button onClick={ e => add()}>add</button>
       <ul>
         { todos.map( (todo,i) =>
           <Todo
