@@ -24,10 +24,8 @@ Do the following to complete this assignment:
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
 
-## Your Web Application Title
+## Assignment/Grade Tracker
 
-your hosting link e.g. http://a4-charlieroberts.me
 
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
+This project is a grade tracker, where you put in the assignment and grade and it will display your entry along with your GPA based on the grade. Implementing my project with React imrpoved the development experience for me. I enjoyed learning about React components and it was easier to implement the client-side of my application with React than with the previous technology (from assignment 2).
 
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.

@@ -1,15 +1,24 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
+  "name": "vite-express-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "dev": "nodemon src/server/main.js -w src/server",
+    "start": "NODE_ENV=production node src/server/main.js",
+    "build": "vite build"
   },
   "dependencies": {
-    "mime": "^2.4.4"
+    "express": "^5.1.0",
+    "react-dom": "^19.1.0",
+    "react": "^19.1.0",
+    "vite-express": "*"
   },
-  "engines": {
-     "node":"24.x"
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "nodemon": "^3.1.10",
+    "vite": "^6.3.3"
   }
 }
