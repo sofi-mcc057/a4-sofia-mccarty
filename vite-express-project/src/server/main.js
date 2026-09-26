@@ -16,7 +16,7 @@ app.post( '/add', ( req,res ) => {
     assignmenttype: assignmenttype,
     gradeletter: gradeletter,
     cmts: cmts,
-}
+  }
   appdata.push(newEntry)
   res.json( appdata )
 })

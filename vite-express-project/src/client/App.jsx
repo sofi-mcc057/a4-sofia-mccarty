@@ -1,71 +1,92 @@
 import React, { useState, useEffect } from 'react'
 
-const Todo = props => (
-  <li>{props.name} : 
-    <input
-      type="checkbox"
-      defaultChecked={props.completed}
-      onChange={ e => props.onclick( props.name, e.target.checked )
-    }/>
-  </li>
-)
+// const Entry = props => (
+//   <li>{props.name} : 
+//     <input
+//       type="checkbox"
+//       defaultChecked={props.completed}
+//       onChange={ e => props.onclick( props.name, e.target.checked )
+//     }/>
+//   </li>
+// )
+
 
 const App = () => {
-  const [todos, setTodos] = useState([ ]) 
+  const [formData, setFormData] = useState({
+    yourname: '',
+    assignmenttype: '',
+    gradeletter: '',
+    cmts: ''
+  })
 
-  function toggle( name, completed ) {
-    fetch( '/change', {
-      method:'POST',
-      body: JSON.stringify({ name, completed }),
-      headers: { 'Content-Type': 'application/json' }
-    })
+  const [entries, setEntries] = useState([ ]) 
+
+  // function toggle( name, completed ) {
+  //   fetch( '/change', {
+  //     method:'POST',
+  //     body: JSON.stringify({ name, completed }),
+  //     headers: { 'Content-Type': 'application/json' }
+  //   })
+  // }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function add() {
-    const value = document.querySelector('input').value
+    // const value = document.querySelector('input').value
 
     fetch( '/add', {
       method:'POST',
-      body: JSON.stringify({ name:value, completed:false }),
+      body: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' }
     })
     .then( response => response.json() )
     .then( json => {
-       setTodos( json )
+       setEntries( json )
     })
   }
   
   // make sure to only do this once
-  if( todos.length === 0 ) {
+  if( entries.length === 0 ) {
     fetch( '/read' )
       .then( response => response.json() )
       .then( json => {
-        setTodos( json ) 
+        setEntries( json ) 
       })
   }
     
-  useEffect( ()=> {
-    document.title = `${todos.length} todo(s)`
-  })
+  // useEffect( ()=> {
+  //   document.title = `${entries.length} todo(s)`
+  // })
 
   return (
     <div className="App">
-      <label for="yourname" id="labels">What's your name? </label>
-      <input type='text' id='yourname'/>
-      <br/>
-      <br/>
-      <label for="assignment" id="labels">Assignment Type: </label>
-      <select name="assignment-type" id="assignmenttype">
+      <label htmlFor="yourname" id="labels">What's your name? </label>
+      <input type='text' 
+      id='yourname'
+      name='yourname'
+      value={formData.yourname}
+      onChange={handleChange} 
+      />
+      <br/> <br/>
+      <label htmlFor="assignment" id="labels">Assignment Type: </label>
+      <select name="assignmenttype" 
+      id="assignmenttype" 
+      value={formData.assignmenttype} 
+      onChange={handleChange} >
         <option value="">--Please choose an option--</option>
         <option value="hw">hw</option>
         <option value="quiz">quiz</option>
         <option value="test">test</option>
         <option value="project">project</option>
       </select>
-      <br/>
-      <br/>
-      <label for="grade" id="labels">Letter Grade: </label>
-      <select name="grade-letter" id="gradeletter">
+      <br/><br/>
+      <label htmlFor="grade" id="labels">Letter Grade: </label>
+      <select name="gradeletter" 
+      id="gradeletter" 
+      value={formData.gradeletter}
+      onChange={handleChange} >
         <option value="">--Please choose an option--</option>
         <option value="a">a</option>
         <option value="b">b</option>
@@ -74,19 +95,22 @@ const App = () => {
       </select>
       <br/>
       <br/>
-      <label for="cmts" id="labels">Any comments? </label>
-      <textarea id="cmts" name="comments"></textarea>
-      <br/>
-      <br/>
+      <label htmlFor="cmts" id="labels">Any comments? </label>
+      <textarea id="cmts" 
+      name="cmts" 
+      value={formData.cmts}
+      onChange={handleChange} >
+      </textarea>
+      <br/><br/>
     <button onClick={ e => add()}>add</button>
       <ul>
-        { todos.map( (todo,i) =>
-          <Todo
-            key={i}
-            name={todo.name}
-            completed={todo.completed}
-            onclick={ toggle }
-          />
+        { entries.map( (entry,i) =>
+          <li key={i}>
+            name: {entry.yourname} <br/> 
+            assignment type: {entry.assignmenttype} <br/> 
+            grade: ({entry.gradeletter}) <br/> 
+            comments: {entry.cmts} <br/> 
+          </li>
         )}
      </ul> 
     </div>
